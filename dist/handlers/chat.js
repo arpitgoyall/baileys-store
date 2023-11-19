@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const runtime_1 = require("@prisma/client/runtime");
+const client_1 = require("@prisma/client");
 const shared_1 = require("../shared");
 const utils_1 = require("../utils");
 function chatHandler(sessionId, event) {
@@ -58,7 +58,7 @@ function chatHandler(sessionId, event) {
                 });
             }
             catch (e) {
-                if (e instanceof runtime_1.PrismaClientKnownRequestError && e.code === 'P2025') {
+                if (e instanceof client_1.Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
                     return logger.info({ update }, 'Got update for non existent chat');
                 }
                 logger.error(e, 'An error occured during chat update');
